@@ -1,0 +1,1463 @@
+/* ==========================================================================
+   Maths Camps - ProcFu App Builder theme  v1.0.0
+   Built from the Maths Camps website styles, 2026-09-16.
+   Use: link this file from each app's Page Wrapper (customHtml), after the
+   Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
+   Loads after ProcFu's pfui theme + mini.css, so overrides use .pfui scope
+   and !important only where ProcFu/mini.css forces a value.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Brand tokens (lifted from salient-dynamic-styles.css + Adwise custom CSS)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Core palette */
+  --mc-yellow:        #fad92b;   /* nectar accent colour */
+  --mc-yellow-soft:   rgba(250, 217, 43, 0.30);
+  --mc-yellow-tint:   rgba(250, 217, 43, 0.14);
+  --mc-ink:           #111111;   /* body text / dark buttons */
+  --mc-black:         #000000;   /* footer, dark sections */
+  --mc-white:         #ffffff;
+  --mc-bg:            #f8f8f8;   /* page background */
+  --mc-cream:         #f6f5f1;   /* FAQ open / filter panels */
+  --mc-grey:          #707070;
+  --mc-line:          rgba(0, 0, 0, 0.35); /* form borders */
+  --mc-line-soft:     rgba(0, 0, 0, 0.12);
+  --mc-muted:         rgba(0, 0, 0, 0.65);
+
+  /* Secondary palette (Salient extra colours) */
+  --mc-plum:          #52033e;
+  --mc-green:         #0e7d3f;
+  --mc-orange:        #ff6b3d;
+  --mc-gold:          #ffce59;
+  --mc-gradient:      linear-gradient(to right, #ffce59, #ff6b3d);
+
+  /* State colours (from the CF7 form styling) */
+  --mc-error:         #8f191c;
+  --mc-info:          #574e9f;
+  --mc-success:       #0e7d3f;
+
+  /* Typography */
+  --mc-font-head:     "Poppins", "Plus Jakarta Sans", sans-serif;
+  --mc-font-ui:       "Plus Jakarta Sans", "Work Sans", sans-serif;
+  --mc-font-body:     "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mc-track-tight:   -0.03em;
+
+  /* Shape */
+  --mc-radius:        0;         /* site is square-cornered throughout */
+  --mc-rule:          2px solid var(--mc-ink);
+  --mc-bar:           6px solid var(--mc-yellow);
+  --mc-ease:          0.15s ease;
+
+  /* ---- Remap ProcFu / mini.css variables onto the brand ---- */
+  --fore-color: var(--mc-ink);
+  --secondary-fore-color: #444;
+  --hint-fore-color: var(--mc-grey);
+  --back-color: var(--mc-bg);
+  --secondary-back-color: var(--mc-cream);
+  --border-color: var(--mc-line);
+  --secondary-border-color: var(--mc-line-soft);
+  --universal-border-radius: 0;
+  --a-link-color: var(--mc-ink);
+  --a-visited-color: var(--mc-ink);
+
+  --table-border-color: var(--mc-line-soft);
+  --table-border-separator-color: var(--mc-ink);
+  --table-head-back-color: var(--mc-ink);
+  --table-head-fore-color: var(--mc-white);
+  --table-body-back-color: var(--mc-white);
+  --table-body-fore-color: var(--mc-ink);
+  --table-body-alt-back-color: #fbfbf9;
+  --table-body-alt-fore-color: var(--mc-ink);
+  --table-body-hover-back-color: var(--mc-yellow-tint);
+  --table-cell-padding: 0.85rem 1rem;
+
+  --card-back-color: var(--mc-white);
+  --card-fore-color: var(--mc-ink);
+  --card-border-color: var(--mc-line-soft);
+
+  --form-back-color: var(--mc-white);
+  --form-alt-back-color: var(--mc-line-soft);
+  --form-fore-color: var(--mc-ink);
+  --form-border-color: var(--mc-line);
+  --form-row-border-color: transparent;
+  --form-error-back-color: #fbeeee;
+  --form-error-border-color: var(--mc-error);
+  --input-back-color: var(--mc-white);
+  --input-fore-color: var(--mc-ink);
+  --input-alt-fore-color: var(--mc-ink);
+  --input-border-color: var(--mc-line);
+  --input-focus-color: var(--mc-ink);
+  --input-invalid-color: var(--mc-error);
+  --input-locked-back-color: var(--mc-cream);
+  --input-locked-fore-color: var(--mc-ink);
+
+  --button-back-color: var(--mc-white);
+  --button-hover-back-color: var(--mc-ink);
+  --button-fore-color: var(--mc-ink);
+  --button-border-color: var(--mc-ink);
+  --button-hover-border-color: var(--mc-ink);
+
+  --header-back-color: rgba(248, 248, 248, 0.92);
+  --header-fore-color: var(--mc-black);
+  --header-border-color: var(--mc-line-soft);
+  --nav-link-color: var(--mc-black);
+  --footer-back-color: var(--mc-black);
+  --footer-fore-color: var(--mc-white);
+  --footer-link-color: var(--mc-white);
+
+  --mark-back-color: var(--mc-yellow);
+  --mark-fore-color: var(--mc-ink);
+  --toast-back-color: var(--mc-ink);
+  --toast-fore-color: var(--mc-white);
+  --tooltip-back-color: var(--mc-ink);
+  --tooltip-fore-color: var(--mc-white);
+  --modal-overlay-color: rgba(0, 0, 0, 0.6);
+  --modal-close-color: var(--mc-ink);
+  --modal-close-hover-color: var(--mc-yellow);
+  --progress-back-color: var(--mc-line-soft);
+  --progress-fore-color: var(--mc-yellow);
+  --spinner-back-color: var(--mc-line-soft);
+  --spinner-fore-color: var(--mc-yellow);
+
+  --collapse-label-back-color: var(--mc-white);
+  --collapse-label-fore-color: var(--mc-ink);
+  --collapse-label-hover-back-color: var(--mc-cream);
+  --collapse-selected-label-back-color: var(--mc-cream);
+  --collapse-border-color: var(--mc-line-soft);
+  --collapse-content-back-color: var(--mc-cream);
+  --collapse-selected-label-border-color: var(--mc-yellow);
+
+  --status-default-back-color: var(--mc-cream);
+  --status-default-fore-color: var(--mc-ink);
+  --status-default-border-color: var(--mc-line-soft);
+  --status-green-back-color: #eef6f1;
+  --status-green-fore-color: var(--mc-success);
+  --status-green-border-color: var(--mc-success);
+  --status-red-back-color: #fbeeee;
+  --status-red-fore-color: var(--mc-error);
+  --status-red-border-color: var(--mc-error);
+  --status-blue-back-color: #f1f0f8;
+  --status-blue-fore-color: var(--mc-info);
+  --status-blue-border-color: var(--mc-info);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base typography
+   mini.css sets font-family on html,* so the body font must be re-applied
+   to every descendant. :where() keeps specificity at (0,1,0) so every
+   component rule below still wins. Icon fonts are excluded.
+   -------------------------------------------------------------------------- */
+html,
+body {
+  background: var(--mc-bg) !important;
+  color: var(--mc-ink);
+  margin: 0;
+}
+
+.pfui button,
+.pfui .button,
+.pfui a.mc-btn,
+.pfui .pf-form-row,
+.pfui .mc-hero,
+.pfui .mc-band,
+.pfui .mc-panel,
+.pfui .mc-callout,
+.mc-footer {
+  box-sizing: border-box;
+}
+
+body,
+.pfui,
+.pfui :where(*:not(i, .fa, .fas, .far, .fab, [class^="fa-"], [class*=" fa-"])),
+.pfui-modal-window :where(*:not(i, .fa, .fas, .far, .fab, [class^="fa-"], [class*=" fa-"])),
+.select2-container :where(*),
+.mc-footer :where(*) {
+  font-family: var(--mc-font-body);
+}
+
+.pfui {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--mc-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.pfmcappwrapper {
+  max-width: 1200px;
+  padding: 0 24px;
+}
+
+.pfui h1, .pfui h2, .pfui h3, .pfui h4 {
+  font-family: var(--mc-font-head) !important;
+  font-weight: 600;
+  letter-spacing: var(--mc-track-tight);
+  color: var(--mc-ink);
+  margin: 1.25rem 0 0.75rem;
+}
+.pfui h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.1; }
+.pfui h2 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.18; font-family: var(--mc-font-ui) !important; font-weight: 500; }
+.pfui h3 { font-size: clamp(22px, 2.4vw, 28px); line-height: 1.25; }
+.pfui h4 { font-size: 20px; line-height: 1.3; }
+
+.pfui h5 {
+  font-family: var(--mc-font-body) !important;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.04px;
+  line-height: 1.8;
+  margin: 1rem 0 0.25rem;
+}
+.pfui h6 {
+  font-family: var(--mc-font-ui) !important;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 1rem 0 0.25rem;
+}
+
+.pfui p { margin: 0 0 1rem; }
+.pfui b, .pfui strong { font-family: var(--mc-font-ui) !important; font-weight: 700; }
+.pfui small { color: var(--mc-muted); }
+
+/* Links: ink text with the site's thick yellow underline */
+.pfui a,
+.pfui a:visited {
+  color: var(--mc-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--mc-yellow);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--mc-ease), color var(--mc-ease);
+}
+.pfui a:hover,
+.pfui a:focus {
+  color: var(--mc-black);
+  text-decoration-color: var(--mc-ink);
+}
+
+.pfui hr {
+  border: 0;
+  border-top: var(--mc-rule);
+  margin: 2rem 0;
+}
+
+.pfui mark {
+  background: var(--mc-yellow);
+  color: var(--mc-ink);
+  border-radius: 0;
+  padding: 2px 6px;
+  font-family: var(--mc-font-ui);
+  font-weight: 600;
+}
+
+.pfui blockquote {
+  background: var(--mc-cream);
+  border-left: var(--mc-bar);
+  border-top: 0;
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  font-family: var(--mc-font-ui);
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.pfui blockquote::before { display: none; }
+
+.pfui code,
+.pfui pre {
+  background: var(--mc-cream);
+  color: var(--mc-ink);
+  border-radius: 0;
+  border-left: 4px solid var(--mc-yellow);
+}
+
+::selection { background: var(--mc-yellow); color: var(--mc-ink); }
+
+.pfui :focus-visible {
+  outline: 2px solid var(--mc-ink);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   3. App header (loggedInHeader / loggedOutHeader render in .pf-app-header)
+   Mirrors the site nav: light translucent bar, Plus Jakarta 17px/500,
+   3px yellow underline on hover/active, yellow "Portal" CTA.
+   -------------------------------------------------------------------------- */
+.pfui .pf-app-header {
+  background: rgba(248, 248, 248, 0.92) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--mc-line-soft) !important;
+  padding: 18px 0;
+  margin-bottom: 32px;
+}
+
+.pfui .pf-app-header,
+.pfui .pf-app-header * {
+  font-family: var(--mc-font-ui);
+}
+
+.pfui .pfapp-header-nav,
+.pfui .pf-app-header nav,
+.pfui .pf-app-header header {
+  background: transparent !important;
+  border: 0 !important;
+  height: auto;
+}
+
+/* Suggested markup: <nav class="mc-nav"><a class="mc-logo">..</a><div class="mc-nav-links">..</div></nav> */
+.pfui .mc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pfui .mc-logo,
+.pfui .mc-logo:hover {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none !important;
+  line-height: 0;
+}
+.pfui .mc-logo { flex: 0 0 auto; }
+.pfui .mc-logo img { height: 56px; width: auto; max-width: none; }
+
+.pfui .mc-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.pfui .pf-app-header a {
+  color: var(--mc-black) !important;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none !important;
+  position: relative;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.pfui .pf-app-header a:not(.mc-logo):not(.mc-nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  border-top: 3px solid var(--mc-yellow);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pfui .pf-app-header a:not(.mc-logo):not(.mc-nav-cta):hover::after,
+.pfui .pf-app-header a.active::after,
+.pfui .pf-app-header a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.pfui .pf-app-header a.mc-nav-cta {
+  background: var(--mc-yellow);
+  color: var(--mc-ink) !important;
+  padding: 12px 24px;
+  font-weight: 500;
+  transition: background var(--mc-ease), color var(--mc-ease);
+}
+.pfui .pf-app-header a.mc-nav-cta:hover {
+  background: var(--mc-ink);
+  color: var(--mc-white) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   mini.css: default / .primary / .secondary / .tertiary / .inverse
+   Brand:    square, Plus Jakarta 700, yellow on ink, ink on white
+   -------------------------------------------------------------------------- */
+.pfui button,
+.pfui [type="button"],
+.pfui [type="submit"],
+.pfui [type="reset"],
+.pfui a.button,
+.pfui .button,
+.pfui [role="button"],
+.pfui .pf-button,
+.pfui .pfbtnlogin,
+.pfui .pfbtnsimple,
+.pfui .pf-load-more {
+  --button-back-color: var(--mc-white);
+  --button-fore-color: var(--mc-ink);
+  --button-border-color: var(--mc-ink);
+  --button-hover-back-color: var(--mc-ink);
+  --button-hover-border-color: var(--mc-ink);
+  font-family: var(--mc-font-ui) !important;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-transform: none;
+  text-decoration: none !important;
+  border-radius: 0 !important;
+  border: 2px solid var(--button-border-color);
+  background: var(--button-back-color);
+  color: var(--button-fore-color);
+  padding: 14px 28px;
+  margin: 6px 12px 6px 0;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background var(--mc-ease), color var(--mc-ease), border-color var(--mc-ease), transform 0.12s ease;
+}
+
+.pfui button:hover, .pfui button:focus,
+.pfui [type="button"]:hover, .pfui [type="button"]:focus,
+.pfui [type="submit"]:hover, .pfui [type="submit"]:focus,
+.pfui .button:hover, .pfui .button:focus,
+.pfui [role="button"]:hover, .pfui [role="button"]:focus,
+.pfui .pf-button:hover,
+.pfui .pf-load-more:hover {
+  background: var(--button-hover-back-color);
+  border-color: var(--button-hover-border-color);
+  color: var(--mc-white);
+  transform: translateY(-1px);
+}
+
+/* Primary = yellow (site "Register Now") */
+.pfui button.primary,
+.pfui [type="button"].primary,
+.pfui [type="submit"].primary,
+.pfui .button.primary,
+.pfui [role="button"].primary,
+.pfui .pf-button.primary,
+.pfui .pfbtnlogin {
+  --button-back-color: var(--mc-yellow);
+  --button-fore-color: var(--mc-ink);
+  --button-border-color: var(--mc-yellow);
+  --button-hover-back-color: var(--mc-ink);
+  --button-hover-border-color: var(--mc-ink);
+  color: var(--mc-ink) !important;
+}
+.pfui button.primary:hover, .pfui button.primary:focus,
+.pfui [type="button"].primary:hover,
+.pfui [type="submit"].primary:hover,
+.pfui .button.primary:hover,
+.pfui .pf-button.primary:hover,
+.pfui .pfbtnlogin:hover,
+.pfui .pfbtnlogin:focus {
+  color: var(--mc-white) !important;
+}
+
+/* Secondary = ink (site dark "Register Now" on yellow band) */
+.pfui button.secondary,
+.pfui [type="button"].secondary,
+.pfui [type="submit"].secondary,
+.pfui .button.secondary,
+.pfui [role="button"].secondary,
+.pfui .pf-button.secondary,
+.pfui button.inverse,
+.pfui .button.inverse {
+  --button-back-color: var(--mc-ink);
+  --button-fore-color: var(--mc-white);
+  --button-border-color: var(--mc-ink);
+  --button-hover-back-color: transparent;
+  --button-hover-border-color: var(--mc-ink);
+  color: var(--mc-white) !important;
+}
+.pfui button.secondary:hover, .pfui button.secondary:focus,
+.pfui .button.secondary:hover,
+.pfui .pf-button.secondary:hover,
+.pfui button.inverse:hover,
+.pfui .button.inverse:hover {
+  color: var(--mc-ink) !important;
+}
+
+/* Tertiary = outline (site .btn-outline) */
+.pfui button.tertiary,
+.pfui [type="button"].tertiary,
+.pfui [type="submit"].tertiary,
+.pfui .button.tertiary,
+.pfui [role="button"].tertiary,
+.pfui .pf-button.tertiary {
+  --button-back-color: transparent;
+  --button-fore-color: var(--mc-ink);
+  --button-border-color: var(--mc-ink);
+  --button-hover-back-color: var(--mc-ink);
+  color: var(--mc-ink) !important;
+}
+.pfui button.tertiary:hover,
+.pfui .button.tertiary:hover,
+.pfui .pf-button.tertiary:hover {
+  color: var(--mc-white) !important;
+}
+
+/* Sizes */
+.pfui button.small, .pfui .button.small, .pfui .pf-button.small {
+  padding: 9px 18px;
+  font-size: 14px;
+}
+.pfui button.large, .pfui .button.large, .pfui .mc-btn-jumbo {
+  padding: 23px 50px;
+  font-size: 18px;
+}
+
+.pfui button:disabled,
+.pfui .button.disabled,
+.pfui .pf-button.pf-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Links inside buttons inherit button colour */
+.pfui button a,
+.pfui button.primary a,
+.pfui button.secondary a,
+.pfui button.tertiary a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Forms (styled to match the site's Contact Form 7 layer)
+   -------------------------------------------------------------------------- */
+.pf-form {
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  margin: 0 0 24px;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  color: var(--mc-ink);
+}
+.pf-form label { padding: 0; }
+
+.pf-form .pf-form-row {
+  border: 0;
+  padding: 0;
+  margin: 0 0 18px;
+  width: 100%;
+  background: transparent;
+}
+
+.pf-form .pf-label {
+  display: block;
+  padding: 0 0 7px;
+  font-family: var(--mc-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-ink);
+}
+
+.pf-form .pf-required { color: var(--mc-error); padding-left: 4px; }
+
+.pf-form .pf-field-help {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mc-muted);
+  opacity: 1;
+}
+
+.pfui input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+.pfui select,
+.pfui textarea,
+.pf-form .pf-input:not(button),
+.pf-form .pf-selector,
+.pf-form .pf-calc-val {
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 14px;
+  background-color: var(--mc-white);
+  color: var(--mc-ink);
+  border: 1px solid var(--mc-line);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--mc-font-body);
+  font-size: 15px;
+  font-weight: 400;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color var(--mc-ease), box-shadow var(--mc-ease);
+}
+
+.pfui textarea,
+.pf-form textarea.pf-input {
+  min-height: 110px;
+  padding: 12px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.pf-form .pf-selector,
+.pf-form .pf-calc-val {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  margin-left: 0;
+  white-space: normal;
+}
+
+.pf-form .pf-value {
+  margin-left: 0;
+  min-height: 0;
+  font-size: 15px;
+}
+
+/* Focus: the site swaps to a 2px ink border. Box-shadow avoids layout jump. */
+.pfui input:focus,
+.pfui select:focus,
+.pfui textarea:focus,
+.pf-form .pf-input:focus,
+.pf-form .pf-selector:hover {
+  border-color: var(--mc-ink) !important;
+  box-shadow: inset 0 0 0 1px var(--mc-ink) !important;
+}
+
+.pfui select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' stroke='%23111111' stroke-width='2' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.pfui ::placeholder { color: rgba(0, 0, 0, 0.45); opacity: 1; }
+
+.pf-form .pf-field-readonly .pf-calc-val,
+.pfui input[readonly],
+.pfui input:disabled,
+.pfui select:disabled,
+.pfui textarea:disabled {
+  background-color: var(--mc-cream) !important;
+  color: var(--mc-ink);
+  border-color: var(--mc-line-soft);
+}
+
+/* Category pills (Podio category fields) */
+.pf-form .pf-calc-val .pf-catpill,
+.pfui .pf-catpill {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 3px 10px;
+  background: var(--mc-yellow);
+  border: 0;
+  color: var(--mc-ink);
+  font-family: var(--mc-font-ui);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Checkboxes and radios: square, ink border, yellow when checked */
+.pfui input[type="checkbox"],
+.pfui input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  margin: 0 10px 0 0;
+  border: 2px solid var(--mc-ink);
+  border-radius: 0;
+  background: var(--mc-white);
+  display: inline-grid;
+  place-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+}
+.pfui input[type="radio"] { border-radius: 50%; }
+.pfui input[type="checkbox"]::before {
+  content: "\2713";
+  font: 600 13px var(--mc-font-head);
+  color: var(--mc-ink);
+  transform: scale(0);
+  transition: transform 0.15s ease-in-out;
+}
+.pfui input[type="radio"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mc-ink);
+  transform: scale(0);
+  transition: transform 0.15s ease-in-out;
+}
+.pfui input[type="checkbox"]:checked { background: var(--mc-yellow); }
+.pfui input[type="radio"]:checked { background: var(--mc-yellow); }
+.pfui input[type="checkbox"]:checked::before,
+.pfui input[type="radio"]:checked::before { transform: scale(1); }
+.pfui input[type="checkbox"]:disabled,
+.pfui input[type="radio"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* File inputs and uploads */
+.pf-form .pf-file,
+.pf-form .pf-newfile,
+.pfui .pf-upload {
+  border: 1px dashed var(--mc-line);
+  background: var(--mc-white);
+  border-radius: 0;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.pf-form .pf-file:hover,
+.pf-form .pf-newfile:hover,
+.pfui .pf-upload:hover {
+  border: 1px solid var(--mc-ink);
+  background: var(--mc-yellow-tint);
+}
+.pf-form .pf-image-wrapper {
+  border: 1px solid var(--mc-line-soft);
+  border-radius: 0;
+  background: var(--mc-white);
+}
+.pf-form .pf-image-wrapper:hover { border-color: var(--mc-ink); }
+
+/* Validation */
+.pf-form .pf-err-row {
+  border: 0;
+  border-left: 6px solid var(--mc-error);
+  background: var(--form-error-back-color);
+  padding: 10px 14px;
+}
+.pf-form .pf-err-row input,
+.pf-form .pf-err-row select,
+.pf-form .pf-err-row textarea {
+  border: 2px solid var(--mc-error) !important;
+}
+.pf-form .pf-error {
+  background: var(--form-error-back-color);
+  color: var(--mc-error);
+  border-left: 6px solid var(--mc-error);
+  padding: 12px 18px;
+  margin: 0 0 18px;
+  font-family: var(--mc-font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+.pf-form .pf-info {
+  background: var(--mc-cream);
+  border-left: 6px solid var(--mc-info);
+  padding: 12px 18px;
+  margin: 0 0 18px;
+  font-size: 14px;
+}
+
+/* Form action row: first button gets breathing room */
+.pf-form .pf-button:first-child { margin-left: 0; margin-right: 12px; }
+
+/* Select2 (ProcFu uses it for relationship/category pickers) */
+.pfui .select2-container .select2-selection,
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+  min-height: 48px;
+  border: 1px solid var(--mc-line) !important;
+  border-radius: 0 !important;
+  background: var(--mc-white);
+  font-family: var(--mc-font-body);
+  font-size: 15px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 46px;
+  padding-left: 14px;
+  color: var(--mc-ink);
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 46px; right: 8px; }
+.select2-container--default.select2-container--focus .select2-selection,
+.select2-container--default.select2-container--open .select2-selection {
+  border-color: var(--mc-ink) !important;
+  box-shadow: inset 0 0 0 1px var(--mc-ink);
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice,
+.pfui .select2-selection li.select2-selection__choice {
+  background: var(--mc-yellow);
+  border: 0;
+  border-radius: 0;
+  color: var(--mc-ink);
+  font-family: var(--mc-font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 2px 8px;
+}
+.select2-dropdown {
+  border: 2px solid var(--mc-ink) !important;
+  border-radius: 0 !important;
+  font-family: var(--mc-font-body);
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+  background: var(--mc-yellow) !important;
+  color: var(--mc-ink) !important;
+}
+.select2-container--default .select2-results__option[aria-selected="true"] {
+  background: var(--mc-cream);
+}
+.select2-search--dropdown .select2-search__field {
+  border: 1px solid var(--mc-line) !important;
+  border-radius: 0;
+  min-height: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Login / auth screen
+   See procfu-app-builder css-and-dom.md: inputs are .pf-input, button is
+   button.pfbtnlogin, .input-group.fluid is row-direction by default.
+   Scope with body.mc-login (added from scrMkdHead) for the card treatment.
+   -------------------------------------------------------------------------- */
+.pf-form.pf-login-form,
+.pfui .pf-inlay {
+  background: transparent !important;
+  max-width: 460px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 !important;
+  border: 0 !important;
+}
+body.mc-login .pf-form.pf-login-form,
+body.mc-login .pfui .pf-inlay {
+  max-width: none;
+  margin: 0 !important;
+}
+
+.pf-login-form .input-group.fluid {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  margin: 0 0 18px;
+}
+
+.pf-login-form label[for="submit"] { display: none; }
+
+.pf-login-form label,
+.pfui .pf-inlay .pf-label {
+  font-family: var(--mc-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-ink);
+  margin: 0 0 7px;
+  padding: 0;
+  min-width: 0;
+}
+
+.pf-login-form .pf-input:not(.pfbtnlogin),
+.pfui .pf-inlay input[type="text"],
+.pfui .pf-inlay input[type="password"],
+.pfui .pf-inlay input[type="email"] {
+  width: 100%;
+  height: 48px;
+  margin: 0;
+}
+
+.pfui .pfbtnlogin,
+.pfui .pf-inlay button.pfbtnlogin {
+  width: 100%;
+  margin: 12px 0 0;
+  padding: 19px 40px;
+  font-family: var(--mc-font-head) !important;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.pfui .pf-inlay button.pfbtnsimple {
+  margin: 12px 0 0;
+  background: transparent;
+  border-color: transparent;
+  color: var(--mc-ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--mc-yellow);
+  text-decoration-thickness: 3px;
+  padding: 6px 0;
+}
+.pfui .pf-inlay button.pfbtnsimple:hover {
+  background: transparent;
+  color: var(--mc-ink);
+  text-decoration-color: var(--mc-ink);
+  transform: none;
+}
+
+/* App 12003 login footer: "Forgotten your password?" button reads as a link */
+.pfui .login-foot-actions {
+  margin: 20px 0 0;
+  text-align: left;
+}
+.pfui .login-foot-actions a { text-decoration: none !important; }
+.pfui .login-foot-actions button {
+  background: transparent;
+  border-color: transparent;
+  color: var(--mc-ink) !important;
+  padding: 6px 0;
+  margin: 0;
+  font-weight: 500;
+  text-decoration: underline !important;
+  text-decoration-color: var(--mc-yellow) !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 3px;
+}
+.pfui .login-foot-actions button:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--mc-ink) !important;
+  text-decoration-color: var(--mc-ink) !important;
+  transform: none;
+}
+
+/* Card treatment for the login screen: add body class from scrMkdHead */
+body.mc-login { background: var(--mc-bg) !important; }
+body.mc-login .pfscreen {
+  max-width: 520px;
+  margin: 48px auto;
+  background: var(--mc-white);
+  border-top: 6px solid var(--mc-yellow);
+  padding: 40px 36px 36px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+body.mc-login .pfscreen h1,
+body.mc-login .pfscreen h2 {
+  text-align: left;
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Tables (list screens, calc tables, gSheet)
+   Site pattern: 2px ink rules top and bottom, ink header, yellow hover.
+   -------------------------------------------------------------------------- */
+.pfui table,
+.pfui table.pftable {
+  width: 100%;
+  border-collapse: collapse !important;
+  border: 0;
+  border-top: var(--mc-rule);
+  border-bottom: var(--mc-rule);
+  background: var(--mc-white);
+  margin: 0 0 24px;
+  font-family: var(--mc-font-body);
+  font-size: 15px;
+}
+
+.pfui table caption {
+  font-family: var(--mc-font-head);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: var(--mc-track-tight);
+  text-align: left;
+  padding: 0 0 10px;
+}
+
+.pfui table thead th,
+.pfui table.pftable th {
+  background: var(--mc-ink) !important;
+  color: var(--mc-white) !important;
+  font-family: var(--mc-font-body) !important;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.04px;
+  text-align: left;
+  padding: 12px 16px;
+  border: 0 !important;
+  white-space: nowrap;
+}
+
+.pfui table td,
+.pfui table.pftable td {
+  padding: 13px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--mc-line-soft);
+  color: var(--mc-ink);
+  vertical-align: top;
+  background: var(--mc-white);
+}
+
+.pfui table tbody tr:nth-child(even) td { background: var(--table-body-alt-back-color); }
+.pfui table tbody tr:last-child td { border-bottom: 0; }
+
+.pfui table.pf-tr-clickable tr:hover td,
+.pfui table tbody tr:hover td {
+  background: var(--mc-yellow-tint) !important;
+}
+.pfui table.pf-tr-clickable tr:hover td:first-child {
+  box-shadow: inset 6px 0 0 var(--mc-yellow);
+}
+
+.pfui table .pftd-center { text-align: center; }
+.pfui table .pftd-right { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Search / filter bar above lists: echoes the careers filter panel */
+.pfui .pf-search-bar,
+.pfui .pf-table-search,
+.pfui .pf-sheet-search {
+  background: var(--mc-cream);
+  border-top: var(--mc-rule);
+  padding: 20px 24px;
+  margin: 0 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.pfui .pf-search-bar input,
+.pfui .pf-sheet-search input,
+.pfui .pf-table-search input {
+  flex: 1 1 240px;
+  width: auto;
+}
+.pfui .pf-search-bar a.button,
+.pfui .pf-search-bar button {
+  margin: 0;
+  padding: 14px 28px;
+  min-height: 48px;
+}
+
+.pfui .pf-load-more {
+  display: block;
+  margin: 16px auto;
+  text-align: center;
+}
+
+/* gSheet grid */
+.pfui .gSheet { border-top: var(--mc-rule); font-family: var(--mc-font-body); }
+.pfui .gSheet .pfSheetActiveRow { background: var(--mc-yellow-tint) !important; }
+.pfui div.gSheetMenuContainer div.gSheetMenu button {
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Cards (card screens) and mini.css .card
+   -------------------------------------------------------------------------- */
+.pfui .pf-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin: 0 0 24px;
+}
+.pfui .pf-cards::after { display: none; }
+
+.pfui .pf-cards .pf-card,
+.pfui .card {
+  float: none;
+  width: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 24px;
+  background: var(--mc-white);
+  border: 0;
+  border-top: var(--mc-rule);
+  border-radius: 0;
+  box-shadow: 0 1px 0 var(--mc-line-soft);
+  transition: box-shadow var(--mc-ease), transform var(--mc-ease);
+}
+
+.pfui .pf-cards .pf-card img {
+  height: 160px;
+  margin: -24px -24px 18px;
+  width: calc(100% + 48px);
+  max-width: none;
+}
+
+.pfui .pf-cards .pf-card-clickable:hover,
+.pfui .card:hover {
+  margin: 0;
+  border: 0;
+  border-top: var(--mc-rule);
+  box-shadow: inset 6px 0 0 var(--mc-yellow), 0 12px 30px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.pfui .pf-card h3,
+.pfui .pf-card h4,
+.pfui .card h3,
+.pfui .card h4 { margin-top: 0; }
+
+/* --------------------------------------------------------------------------
+   9. Tabs, collapses, modal, alerts, calendar
+   -------------------------------------------------------------------------- */
+.pfui .pfui-tabs,
+.pfui .pfui-embedded-tabs .pfui-embedded-tabstrip {
+  margin: 1rem 0 0;
+  border-bottom: 1px solid var(--mc-line-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pfui .pfui-tabs .pfui-tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 10px 18px;
+  margin-bottom: -1px;
+  font-family: var(--mc-font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mc-muted);
+  transition: color var(--mc-ease), border-color var(--mc-ease), background var(--mc-ease);
+}
+.pfui .pfui-tabs .pfui-tab:hover {
+  background: transparent;
+  color: var(--mc-ink);
+  border-bottom-color: var(--mc-yellow-soft);
+}
+.pfui .pfui-tab.pfui-tabactive {
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid var(--mc-yellow);
+  color: var(--mc-ink);
+  font-weight: 700;
+}
+.pfui .tabsheet {
+  background: var(--mc-white);
+  border: 0;
+  padding: 24px 0;
+}
+
+/* Collapse / accordion: matches the FAQ toggles */
+.pfui .collapse > label {
+  background: var(--mc-white);
+  border: 0;
+  border-top: 1px solid var(--mc-line-soft);
+  font-family: var(--mc-font-ui);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 30px;
+}
+.pfui .collapse > :checked + label {
+  background: var(--mc-cream);
+  border-top: var(--mc-rule);
+  border-left: var(--mc-bar);
+  font-size: 22px;
+}
+.pfui .collapse > :checked + label + div {
+  background: var(--mc-cream);
+  border-left: var(--mc-bar);
+  padding: 0 30px 20px;
+}
+
+/* Modal */
+.pfui-modal-cover { background: rgba(0, 0, 0, 0.6) !important; }
+.pfui-modal-window {
+  border-radius: 0 !important;
+  border: 0 !important;
+  border-top: 6px solid var(--mc-yellow) !important;
+  background: var(--mc-white) !important;
+  box-shadow: 12px 12px 50px rgba(0, 0, 0, 0.4) !important;
+}
+.pfui-modal-closer {
+  color: var(--mc-ink) !important;
+  font-size: 28px;
+  transition: background var(--mc-ease);
+}
+.pfui-modal-closer:hover { background: var(--mc-yellow); }
+
+/* Alerts / toasts (pfalertmsg .grn / .red / .blu) */
+.pfalertbox { top: 16px; padding: 0 16px; }
+.pfalertmsg {
+  border-radius: 0 !important;
+  border: 0 !important;
+  border-left: 6px solid var(--mc-yellow) !important;
+  background: var(--mc-white) !important;
+  color: var(--mc-ink) !important;
+  font-family: var(--mc-font-body);
+  font-size: 15px;
+  font-weight: 500 !important;
+  padding: 14px 44px 14px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.pfalertmsg.grn { border-left-color: var(--mc-success) !important; }
+.pfalertmsg.red { border-left-color: var(--mc-error) !important; color: var(--mc-error) !important; }
+.pfalertmsg.blu { border-left-color: var(--mc-info) !important; }
+.pfalertbtn { top: 10px; right: 14px; font-size: 22px; color: var(--mc-ink); }
+
+/* Loading overlay: use the page colour rather than white pulse */
+#pf-overlay { background-color: var(--mc-bg) !important; }
+
+/* Calendar (FullCalendar) */
+.pfui .pfcal .fc-event {
+  background: var(--mc-yellow);
+  border: 0;
+  border-radius: 0;
+  color: var(--mc-ink);
+  font-family: var(--mc-font-ui);
+  font-weight: 600;
+}
+.fc-button,
+.fc .fc-button-primary {
+  background: var(--mc-white) !important;
+  border: 2px solid var(--mc-ink) !important;
+  border-radius: 0 !important;
+  color: var(--mc-ink) !important;
+  font-family: var(--mc-font-ui);
+  font-weight: 700;
+  box-shadow: none !important;
+}
+.fc-button:hover,
+.fc .fc-button-primary:hover,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background: var(--mc-ink) !important;
+  color: var(--mc-white) !important;
+}
+.fc .fc-day-today { background: var(--mc-yellow-tint) !important; }
+
+/* Status pills (use in markdown / calc fields) */
+.pfui .mc-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  font-family: var(--mc-font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  background: var(--mc-cream);
+  color: var(--mc-ink);
+}
+.pfui .mc-pill.is-yellow { background: var(--mc-yellow); }
+.pfui .mc-pill.is-ink    { background: var(--mc-ink); color: var(--mc-white); }
+.pfui .mc-pill.is-green  { background: var(--mc-green); color: var(--mc-white); }
+.pfui .mc-pill.is-red    { background: var(--mc-error); color: var(--mc-white); }
+.pfui .mc-pill.is-plum   { background: var(--mc-plum); color: var(--mc-white); }
+
+/* --------------------------------------------------------------------------
+   10. Brand utility classes for scrMkdHead / scrMkdFoot / text screens
+   Use these rather than inline styles: the ProcFu markdown parser breaks
+   <div style="..."> containing parentheses or quotes.
+   -------------------------------------------------------------------------- */
+
+/* Small uppercase label, e.g. "WATCH THE 2027 FILM" / footer column heads */
+.pfui .mc-eyebrow {
+  display: block;
+  font-family: var(--mc-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.04px;
+  text-transform: uppercase;
+  color: var(--mc-ink);
+  margin: 0 0 8px;
+}
+.pfui .mc-eyebrow.is-yellow { color: var(--mc-yellow); }
+
+/* Dark hero band */
+.pfui .mc-hero {
+  background: var(--mc-black);
+  color: var(--mc-white);
+  padding: 56px 48px;
+  margin: 0 0 32px;
+  position: relative;
+}
+.pfui .mc-hero h1,
+.pfui .mc-hero h2,
+.pfui .mc-hero h3 { color: var(--mc-white); margin-top: 0; }
+.pfui .mc-hero p { color: rgba(255, 255, 255, 0.8); max-width: 620px; }
+.pfui .mc-hero a:not(.button):not(.mc-btn) { color: var(--mc-white); }
+
+/* Yellow call-to-action band (site "Interested in Maths Camps...") */
+.pfui .mc-band {
+  background: var(--mc-yellow);
+  color: var(--mc-ink);
+  padding: 48px;
+  margin: 0 0 32px;
+  text-align: center;
+}
+.pfui .mc-band h2,
+.pfui .mc-band h3 { margin-top: 0; }
+.pfui .mc-band p { max-width: 560px; margin-left: auto; margin-right: auto; }
+.pfui .mc-band a:not(.button):not(.mc-btn) { text-decoration-color: var(--mc-ink); }
+
+/* Cream panel with ink rule (careers filter / FAQ open state) */
+.pfui .mc-panel {
+  background: var(--mc-cream);
+  border-top: var(--mc-rule);
+  padding: 28px 30px;
+  margin: 0 0 24px;
+}
+
+/* Callout with yellow left bar */
+.pfui .mc-callout {
+  background: var(--mc-cream);
+  border-top: var(--mc-rule);
+  border-left: var(--mc-bar);
+  padding: 18px 24px;
+  margin: 0 0 24px;
+}
+.pfui .mc-callout.is-info    { border-left-color: var(--mc-info); }
+.pfui .mc-callout.is-error   { border-left-color: var(--mc-error); }
+.pfui .mc-callout.is-success { border-left-color: var(--mc-success); }
+
+/* Anchor-as-button for markdown */
+.pfui a.mc-btn,
+.pfui a.mc-btn:visited {
+  display: inline-block;
+  background: var(--mc-yellow);
+  color: var(--mc-ink);
+  border: 2px solid var(--mc-yellow);
+  font-family: var(--mc-font-ui);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--mc-ease), color var(--mc-ease), border-color var(--mc-ease), transform 0.12s ease;
+}
+.pfui a.mc-btn:hover {
+  background: var(--mc-ink);
+  border-color: var(--mc-ink);
+  color: var(--mc-white);
+  transform: translateY(-1px);
+}
+.pfui a.mc-btn.is-dark { background: var(--mc-ink); border-color: var(--mc-ink); color: var(--mc-white); }
+.pfui a.mc-btn.is-dark:hover { background: transparent; color: var(--mc-ink); }
+.pfui a.mc-btn.is-outline { background: transparent; border-color: var(--mc-ink); color: var(--mc-ink); }
+.pfui a.mc-btn.is-outline:hover { background: var(--mc-ink); color: var(--mc-white); }
+.pfui .mc-hero a.mc-btn.is-outline { border-color: var(--mc-white); color: var(--mc-white); }
+.pfui .mc-hero a.mc-btn.is-outline:hover { background: var(--mc-white); color: var(--mc-ink); }
+
+/* Big number stat (site milestones) */
+.pfui .mc-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin: 0 0 32px;
+}
+.pfui .mc-stat {
+  border-top: var(--mc-rule);
+  padding-top: 14px;
+}
+.pfui .mc-stat-value {
+  display: block;
+  font-family: var(--mc-font-head);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--mc-track-tight);
+  color: var(--mc-ink);
+}
+.pfui .mc-stat-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--mc-muted);
+}
+.pfui .mc-hero .mc-stat { border-top-color: var(--mc-yellow); }
+.pfui .mc-hero .mc-stat-value { color: var(--mc-yellow); }
+.pfui .mc-hero .mc-stat-label { color: rgba(255, 255, 255, 0.75); }
+
+/* Highlighter: yellow block behind words, as in the logo */
+.pfui .mc-hl {
+  background: linear-gradient(transparent 55%, var(--mc-yellow) 55%);
+  padding: 0 2px;
+}
+
+/* --------------------------------------------------------------------------
+   11. Footer (appFooter / scrMkdFoot): black band with yellow column heads
+   -------------------------------------------------------------------------- */
+.pfui .mc-footer,
+.mc-footer {
+  background: var(--mc-black);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 44px 48px 36px;
+  margin-top: 56px;
+  font-family: var(--mc-font-body);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.mc-footer img { height: 48px; width: auto; margin-bottom: 14px; }
+.mc-footer .mc-eyebrow,
+.mc-footer h5 {
+  color: var(--mc-yellow) !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.04px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.mc-footer a,
+.mc-footer a:visited {
+  color: var(--mc-white) !important;
+  text-decoration: none !important;
+}
+.mc-footer a:hover {
+  text-decoration: underline !important;
+  text-decoration-color: var(--mc-yellow) !important;
+  text-decoration-thickness: 2px !important;
+}
+.mc-footer p { color: rgba(255, 255, 255, 0.85); margin: 0 0 8px; }
+.mc-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.mc-footer ul { list-style: none; margin: 0; padding: 0; }
+.mc-footer small { display: block; color: rgba(255, 255, 255, 0.55); margin-top: 24px; }
+@media only screen and (max-width: 767px) {
+  .mc-footer-grid { grid-template-columns: 1fr 1fr; }
+  .mc-footer-grid > :first-child { grid-column: 1 / -1; }
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive (site breakpoints 1000px header, 667px mobile)
+   -------------------------------------------------------------------------- */
+@media only screen and (max-width: 1000px) {
+  .pfui .mc-nav-links { gap: 18px; }
+  .pfui .pf-app-header a { font-size: 16px; }
+  .pfui .mc-hero,
+  .pfui .mc-band,
+  .pfui .mc-footer,
+  .mc-footer { padding: 36px 28px; }
+}
+
+@media only screen and (max-width: 767px) {
+  .pfmcappwrapper { padding: 0 16px; }
+  .pfui .pf-app-header { padding: 12px 0; margin-bottom: 20px; }
+  .pfui .mc-nav { padding: 0 16px; }
+  .pfui .mc-logo img { height: 44px; }
+  .pfui .mc-nav-links { width: 100%; gap: 14px 20px; }
+  body.mc-login .pfscreen { margin: 20px auto; padding: 28px 20px; }
+  .pfui .pf-cards { grid-template-columns: 1fr; }
+
+  /* ProcFu's stacked mobile tables: keep the brand labels */
+  .pfui .pfforcetables table td:before {
+    font-family: var(--mc-font-body);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--mc-muted);
+  }
+  .pfui .pfforcetables table tr { border-bottom: var(--mc-rule); }
+}
+
+@media only screen and (max-width: 667px) {
+  /* Site rule: primary actions go full width on mobile */
+  .pfui button.primary,
+  .pfui .button.primary,
+  .pfui .pf-button.primary,
+  .pfui [type="submit"],
+  .pfui a.mc-btn {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+  }
+  .pfui .pfui-tabs .pfui-tab { padding: 8px 12px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pfui *,
+  .pfui *::before,
+  .pfui *::after {
+    transition: none !important;
+    transform: none !important;
+  }
+}
