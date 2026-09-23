@@ -1,6 +1,6 @@
 /* TEST EDIT FOR GITHUB */
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.1 (2026-09-23 QA fixes, see section 13)
+   Maths Camps - ProcFu App Builder theme  v1.0.2 (2026-09-23 QA fixes, see section 13)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1582,6 +1582,11 @@ body.mc-login .pf-form .pf-form-row > [class*="col-sm-"] {
   padding-right: 0 !important;
 }
 body.mc-login .pf-form .pfButtonRow > .col-md-3:empty { display: none; }
+
+/* 13g. Read-only field values: ProcFu wraps text values in <p>, and the
+   section 2 paragraph margin (0 0 1rem) added 16px of dead space at the
+   bottom of each value box. Keep spacing between paragraphs only. */
+.pf-form .pf-calc-val > p:last-child { margin-bottom: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .pfui *,
