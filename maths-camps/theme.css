@@ -1,6 +1,6 @@
 /* TEST EDIT FOR GITHUB */
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.5 (2026-09-23 QA fixes, see section 13)
+   Maths Camps - ProcFu App Builder theme  v1.0.6 (2026-09-23 QA fixes, see section 13)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1628,15 +1628,26 @@ body.mc-login .pfui .mc-lead { font-size: 16px; margin-bottom: 1.5rem; }
 .pfui .pfscreen .pfscreen h2,
 .pfui .pfscreen .pfscreen .pfscreen .pfscreen h1 { font-size: clamp(19px, 2vw, 22px); line-height: 1.3; }
 
-/* 13k. School Portal nominations list: step ticks and nominator summary
-   (columns are built by the nom_list bhvOnRender script) */
+/* 13k. Nomination step ticks (School nom_list and Parent child_list) and the
+   School nominator summary (columns are built by each list's bhvOnRender script) */
 .pfui .mc-col-hidden { display: none !important; }
 .pfui table th[data-field="steps-completed-by-participant-internal"],
 .pfui table td[data-field="steps-completed-by-participant-internal"] { display: none; }
 .pfui table th.mc-step-col,
 .pfui table td.mc-step-col { text-align: center; width: 1%; white-space: nowrap; }
 .pfui .mc-tick { display: inline-block; font-size: 20px; font-weight: 700; line-height: 1; }
-.pfui .mc-tick.is-yes { color: var(--mc-success); }
+/* Done: white tick in a solid green circle so it stands out; not done stays a plain red cross */
+.pfui .mc-tick.is-yes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--mc-success);
+  color: var(--mc-white);
+  font-size: 14px;
+}
 .pfui .mc-tick.is-no  { color: var(--mc-error); }
 .pfui .mc-nominators {
   background: var(--mc-white);
