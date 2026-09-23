@@ -1,6 +1,6 @@
 /* TEST EDIT FOR GITHUB */
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.2 (2026-09-23 QA fixes, see section 13)
+   Maths Camps - ProcFu App Builder theme  v1.0.3 (2026-09-23 QA fixes, see section 13)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1587,6 +1587,39 @@ body.mc-login .pf-form .pfButtonRow > .col-md-3:empty { display: none; }
    section 2 paragraph margin (0 0 1rem) added 16px of dead space at the
    bottom of each value box. Keep spacing between paragraphs only. */
 .pf-form .pf-calc-val > p:last-child { margin-bottom: 0; }
+
+/* 13h. Footer: sits at the bottom of the window on short pages, after the
+   content on long pages. The footer is a direct child of <body>, a sibling
+   of .pfmcappwrapper, so body becomes a full-height flex column and the
+   wrapper grows to fill spare space. border-box + 1248px keeps the wrapper
+   at its original 1200px content width. */
+body:has(> footer.mc-footer) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body:has(> footer.mc-footer) > .pfmcappwrapper {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1248px;
+  box-sizing: border-box;
+}
+body:has(> footer.mc-footer) > footer.mc-footer { flex-shrink: 0; }
+
+/* 13i. Intro copy on portal screens: lead paragraph and callout lists */
+.pfui .mc-lead {
+  font-family: var(--mc-font-ui);
+  font-size: 19px;
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 0 0 1.25rem;
+}
+body.mc-login .pfui .mc-lead { font-size: 16px; margin-bottom: 1.5rem; }
+.pfui .mc-callout { max-width: 760px; }
+.pfui .mc-callout ol,
+.pfui .mc-callout ul { margin: 8px 0 0; padding-left: 22px; }
+.pfui .mc-callout li { margin: 0 0 4px; }
+.pfui .mc-callout > :last-child { margin-bottom: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .pfui *,
