@@ -1,5 +1,6 @@
 # Maths Camps theme changelog
 
+- v1.0.6 (23/09/2026): done ticks shown as a white tick in a green circle (School nominations and Parent children lists).
 - v1.0.5 (23/09/2026): personal greeting (mc-hello) above the home page title.
 - v1.0.4 (23/09/2026): heading scale (H1 page title, H2 section, H3 sub-section), embedded screens shown one level down, School nominations tick columns and Nominated by panel, read-only list rows (Trust schools yet to register), mc-lead and mc-callout full width.
 - v1.0.3 (23/09/2026): footer sits at the bottom of the window on short pages; mc-lead and callout styles.
