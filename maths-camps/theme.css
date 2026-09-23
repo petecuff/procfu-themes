@@ -1,6 +1,6 @@
 /* TEST EDIT FOR GITHUB */
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.0
+   Maths Camps - ProcFu App Builder theme  v1.0.1 (2026-09-23 QA fixes, see section 13)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1453,6 +1453,135 @@ body.mc-login .pfscreen h2 {
   }
   .pfui .pfui-tabs .pfui-tab { padding: 8px 12px; font-size: 14px; }
 }
+
+/* --------------------------------------------------------------------------
+   13. QA fixes 2026-09-23 (portal smoke test: apps 11975 / 11976 / 11979)
+   -------------------------------------------------------------------------- */
+
+/* 13a. Error / warning / info cards. mini.css sets .card.error text to the
+   page back-colour and relies on a red background; section 8 forces cards
+   white, so login errors ("Invalid Credentials") were white on white. */
+.pfui .card.error,
+.pfui .card.warning,
+.pfui .card.info,
+.pfui .card.error:hover,
+.pfui .card.warning:hover,
+.pfui .card.info:hover {
+  background: var(--form-error-back-color) !important;
+  color: var(--mc-error) !important;
+  border: 0 !important;
+  border-left: 6px solid var(--mc-error) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  width: 100%;
+  max-width: none;
+  margin: 0 0 18px !important;
+  padding: 12px 18px !important;
+  box-sizing: border-box;
+}
+.pfui .card.warning,
+.pfui .card.warning:hover {
+  background: var(--mc-yellow-tint) !important;
+  color: var(--mc-ink) !important;
+  border-left-color: var(--mc-yellow) !important;
+}
+.pfui .card.info,
+.pfui .card.info:hover {
+  background: var(--mc-cream) !important;
+  color: var(--mc-ink) !important;
+  border-left-color: var(--mc-info) !important;
+}
+.pfui .card.error *,
+.pfui .card.warning *,
+.pfui .card.info * {
+  color: inherit !important;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* 13b. Form button rows: the wrapper div is .pf-input, so it picked up the
+   input border and rendered a box around Save / Cancel / Submit. */
+.pf-form .pfButtonRow div.pf-input,
+.pf-form div.pf-input:has(> .pf-button),
+.pf-form .pfCommentRow div.pf-input:has(button) {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  width: auto !important;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0 12px 6px 0 !important;
+  vertical-align: middle;
+}
+.pf-form .pfButtonRow .pf-button { margin: 0 !important; }
+
+/* 13c. Select2 multi-selects (email fields, multi-category fields): the
+   inline search box picked up the full input styling (and a red border on
+   validation), showing as a small empty box inside the field. */
+.pfui .select2-search--inline .select2-search__field,
+.pf-form .pf-err-row .select2-search--inline .select2-search__field {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  min-height: 0 !important;
+  height: 28px !important;
+  padding: 0 !important;
+  margin: 8px 0 0 6px !important;
+  width: auto;
+}
+.pf-form .select2-container {
+  width: 100% !important;
+  max-width: 100%;
+}
+.pfui .select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background: var(--mc-yellow) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--mc-ink) !important;
+  margin: 8px 6px 0 6px;
+}
+
+/* 13d. Embedded tabs (@[pf_tabs:...]): the outer .pfui-tabs was flex, which
+   put the tab strip and the tab content side by side. Stack them. */
+.pfui .pfui-tabs.pfui-embedded-tabs {
+  display: block;
+  border-bottom: 0;
+  margin-top: 2rem;
+}
+.pfui .pfui-embedded-tabs .pfui-embedded-tabstrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 8px;
+  border-bottom: 1px solid var(--mc-line-soft);
+}
+.pfui .pfui-embedded-tabs .pfui-tab { cursor: pointer; }
+
+/* 13e. Message thread bubbles: text sat flush against the bubble edge and
+   long lines were clipped. */
+.pfui .pf-comment > p {
+  padding: 4px 14px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.pfui .pf-comment > p:last-child { padding-bottom: 10px; }
+
+/* 13f. Forms inside the login card (Forgotten Password): stack label above
+   field instead of a cramped 25/75 split inside a 520px card. */
+body.mc-login .pf-form .pf-form-row > [class*="col-md-"],
+body.mc-login .pf-form .pf-form-row > [class*="col-sm-"] {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+body.mc-login .pf-form .pfButtonRow > .col-md-3:empty { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .pfui *,
