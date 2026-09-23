@@ -1,6 +1,6 @@
 /* TEST EDIT FOR GITHUB */
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.4 (2026-09-23 QA fixes, see section 13)
+   Maths Camps - ProcFu App Builder theme  v1.0.5 (2026-09-23 QA fixes, see section 13)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1655,6 +1655,23 @@ body.mc-login .pfui .mc-lead { font-size: 16px; margin-bottom: 1.5rem; }
 .pfui table:has(td[data-field="schoolname"]) tbody tr:hover td { background: var(--mc-white) !important; cursor: default; }
 .pfui table:has(td[data-field="schoolname"]) tbody tr:nth-child(even):hover td { background: var(--table-body-alt-back-color) !important; }
 .pfui .mc-unreg-empty { font-family: var(--mc-font-ui); }
+
+/* 13m. Personal greeting above the home page title. The mc-hello paragraph is
+   filled by a small script from @[pf_auth_item:...] tokens and stays hidden
+   when the user's record has no name. */
+.pfui .mc-hello { margin: 0 0 0.25rem; font-family: var(--mc-font-ui); line-height: 1.4; }
+.pfui .mc-hello[hidden] { display: none; }
+.pfui .mc-hello-main {
+  display: inline-block;
+  font-family: var(--mc-font-ui) !important;
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(transparent 55%, var(--mc-yellow) 55%);
+  padding: 0 2px;
+}
+.pfui .mc-hello-sub { display: block; font-size: 15px; font-weight: 500; color: var(--mc-muted); margin-top: 4px; }
+.pfui .mc-hello-sub:empty { display: none; }
+.pfui .mc-hello ~ h1 { margin-top: 0.5rem; }
 
 @media (prefers-reduced-motion: reduce) {
   .pfui *,
