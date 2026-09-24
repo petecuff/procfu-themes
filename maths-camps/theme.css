@@ -2225,4 +2225,4 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
 .pfui .mc-form-col.is-received .pfm-footer button { display: none !important; }
 .pfui .mc-form-col.is-received .pf-cards > p { font-style: normal; color: var(--mc-ink); }
 .pfui .mc-form-col .pfcardwrap { display: grid; grid-template-columns: 1fr; gap: 10px; }
-.pfui .mc-form-col .pf-card:not(.pfpreview) { display: block; width: auto; padding: 16px 44px 16px 18px; }
+.pfui .mc-form-col .pf-card:not(.pfpreview) { display: block; width: auto; min-height: 0; padding: 16px 44px 16px 18px; }
