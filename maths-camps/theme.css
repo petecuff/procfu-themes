@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.9 (2026-09-24 user feedback round, see section 15)
+   Maths Camps - ProcFu App Builder theme  v1.0.10 (2026-10-05: callout top rule removed; phone row arrow beside the pupil name, see section 16)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1285,7 +1285,7 @@ body.mc-login .pfscreen h2 {
 /* Callout with yellow left bar */
 .pfui .mc-callout {
   background: var(--mc-cream);
-  border-top: var(--mc-rule);
+  border-top: 0;   /* no black top rule (client request, 05/10/2026) */
   border-left: var(--mc-bar);
   padding: 18px 24px;
   margin: 0 0 24px;
@@ -2226,3 +2226,37 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
 .pfui .mc-form-col.is-received .pf-cards > p { font-style: normal; color: var(--mc-ink); }
 .pfui .mc-form-col .pfcardwrap { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .pfui .mc-form-col .pf-card:not(.pfpreview) { display: block; width: auto; min-height: 0; padding: 16px 44px 16px 18px; }
+
+/* --------------------------------------------------------------------------
+   16. Feedback round 2026-10-05
+   -------------------------------------------------------------------------- */
+
+/* 16a. Phones: on stacked click-through tables that list pupils (Parent: My Children,
+   School: Nominations) the chevron sits beside the pupil's name at the top of each
+   card, not at the end of the card next to Travel. ProcFu stacks tables at 767px. */
+@media only screen and (max-width: 767px) {
+  .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview) > td:last-child {
+    padding-right: 16px !important;
+  }
+  .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview) > td:last-child::after {
+    content: none;
+    display: none;
+  }
+  .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview) > td[data-field="pupil-full-name"] {
+    position: relative;
+    padding-right: 48px !important;
+  }
+  .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview) > td[data-field="pupil-full-name"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    width: 10px;
+    height: 16px;
+    margin-top: -8px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 16'%3E%3Cpath d='M2 2l6 6-6 6' fill='none' stroke='%23111111' stroke-width='2.5'/%3E%3C/svg%3E") no-repeat center / contain;
+    pointer-events: none;
+    transition: right var(--mc-ease);
+  }
+  .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview):hover > td[data-field="pupil-full-name"]::after { right: 13px; }
+}
