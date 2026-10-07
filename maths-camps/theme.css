@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.10 (2026-10-05: callout top rule removed; phone row arrow beside the pupil name, see section 16)
+   Maths Camps - ProcFu App Builder theme  v1.0.11 (2026-10-07: checkbox tick and radio dot centred, see section 16b)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -2259,4 +2259,39 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
     transition: right var(--mc-ease);
   }
   .pfui table.pf-tr-clickable:has(td[data-field="pupil-full-name"]) > tbody > tr:not(.pfpreview):hover > td[data-field="pupil-full-name"]::after { right: 13px; }
+}
+
+/* 16b. Checkbox tick and radio dot centred in their box (07/10/2026). ProcFu's base
+   stylesheet (mini.css) positions [type=checkbox]:checked:before absolutely, 8px above
+   the box, so the tick sat low and to the left. Pin both marks back into the grid
+   centre, draw the tick as an SVG (font glyphs vary by device), and show/hide with
+   opacity rather than scale so the reduced-motion rule cannot reveal unticked marks. */
+.pfui input[type="checkbox"]::before,
+.pfui input[type="checkbox"]:checked::before {
+  content: "";
+  position: static;
+  top: auto;
+  left: auto;
+  width: 14px;
+  height: 14px;
+  font-size: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.4l3.3 3.3L12 4' fill='none' stroke='%23111111' stroke-width='2.4'/%3E%3C/svg%3E") no-repeat center / contain;
+  transform: none;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+.pfui input[type="radio"]::before,
+.pfui input[type="radio"]:checked::before {
+  position: static;
+  top: auto;
+  left: auto;
+  width: 10px;
+  height: 10px;
+  transform: none;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+.pfui input[type="checkbox"]:checked::before,
+.pfui input[type="radio"]:checked::before {
+  opacity: 1;
 }
