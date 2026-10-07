@@ -1,5 +1,6 @@
 # Maths Camps theme changelog
 
+- v1.0.12 (07/10/2026): long checkbox and radio option labels wrap under their own text instead of under the box (section 16c).
 - v1.0.11 (07/10/2026): checkbox tick and radio dot centred in their box (mini.css positioned the checked mark absolutely, 8px above the box); tick drawn as an SVG; marks shown with opacity so the reduced-motion rule cannot reveal unticked marks (section 16b).
 - v1.0.10 (05/10/2026): callouts (mc-callout) lose the black top rule; on phones the row chevron on pupil tables (Parent My Children, School Nominations) sits beside the pupil's name instead of at the end of the card (section 16).
 - v1.0.9 (24/09/2026): user feedback round (section 15). Right-pointing arrow at the end of every click-through table row, key under the tick tables and table footnotes, locked-step icon, "My account" dropdown and external-link icon in the menu, hamburger menu on phones (shown only once the menu script has run), Parent My Child forms as three step columns (to do / done / locked, with a lock note), screen-reader-only text helper (mc-sr).
