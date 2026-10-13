@@ -2,6 +2,7 @@
 
 Each app's Page Wrapper links the theme as theme.css?v=<version>. Bump that query in all three apps (11975, 11976, 11979) with every release, or browsers keep showing the old theme from cache.
 
+- v1.0.14 (13/10/2026): Back link underline runs unbroken under the arrow and the word; drawn as a background line instead of a text underline, which broke at the gap after the arrow (section 14h). Page Wrappers now load theme.css?v=1.0.14.
 - v1.0.13 (07/10/2026): required-field asterisk never wraps onto a line by itself; it sits after the last word of the label (section 16d). Page Wrappers now load theme.css?v=1.0.13.
 - v1.0.12 (07/10/2026): long checkbox and radio option labels wrap under their own text instead of under the box (section 16c).
 - v1.0.11 (07/10/2026): checkbox tick and radio dot centred in their box (mini.css positioned the checked mark absolutely, 8px above the box); tick drawn as an SVG; marks shown with opacity so the reduced-motion rule cannot reveal unticked marks (section 16b).

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.13 (2026-10-07: checkbox tick centred, option labels wrap under their text, required asterisk kept with its word, see section 16)
+   Maths Camps - ProcFu App Builder theme  v1.0.14 (2026-10-13: Back link underline runs unbroken under the arrow and the word, see section 14h)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -1886,7 +1886,9 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
 .pfui button.pf-button[onclick*="history.back"],
 .pfui button.pf-button[onclick*="history.back"]:hover,
 .pfui button.pf-button[onclick*="history.back"]:focus {
-  background: transparent !important;
+  /* v1.0.14: the underline is a background line, so it runs unbroken under the arrow and the word
+     (a text underline broke at the gap after the arrow, which is drawn in a fallback font) */
+  background: linear-gradient(var(--mc-yellow), var(--mc-yellow)) no-repeat left bottom 3px / 100% 3px !important;
   border: 0 !important;
   box-shadow: none !important;
   color: var(--mc-ink) !important;
@@ -1894,14 +1896,11 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
   margin: 6px 24px 6px 0 !important;
   font-size: 16px;
   font-weight: 600;
-  text-decoration: underline !important;
-  text-decoration-color: var(--mc-yellow) !important;
-  text-decoration-thickness: 3px !important;
-  text-underline-offset: 5px;
+  text-decoration: none !important;
   transform: none !important;
   width: auto !important;
 }
-.pfui button.pf-button[onclick*="history.back"]:hover { text-decoration-color: var(--mc-ink) !important; }
+.pfui button.pf-button[onclick*="history.back"]:hover { background-image: linear-gradient(var(--mc-ink), var(--mc-ink)) !important; }
 .pfui button.pf-button[onclick*="history.back"]:focus-visible { outline: 3px solid var(--mc-ink); outline-offset: 3px; }
 .pfui button.pf-button[onclick*="history.back"]::before { content: "\2190\00a0"; }
 
