@@ -2,6 +2,7 @@
 
 Each app's Page Wrapper links the theme as theme.css?v=<version>. Bump that query in all three apps (11975, 11976, 11979) with every release, or browsers keep showing the old theme from cache.
 
+- v1.0.15 (15/10/2026): multi-value (Select2) fields such as Parent or carer email line up with the other form fields; the container loses its 4px left margin and its own border, so only the inner box shows (section 16e). Page Wrappers now load theme.css?v=1.0.15.
 - v1.0.14 (13/10/2026): Back link underline runs unbroken under the arrow and the word; drawn as a background line instead of a text underline, which broke at the gap after the arrow (section 14h). Page Wrappers now load theme.css?v=1.0.14.
 - v1.0.13 (07/10/2026): required-field asterisk never wraps onto a line by itself; it sits after the last word of the label (section 16d). Page Wrappers now load theme.css?v=1.0.13.
 - v1.0.12 (07/10/2026): long checkbox and radio option labels wrap under their own text instead of under the box (section 16c).

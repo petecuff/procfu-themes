@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.14 (2026-10-13: Back link underline runs unbroken under the arrow and the word, see section 14h)
+   Maths Camps - ProcFu App Builder theme  v1.0.15 (2026-10-15: multi-value (Select2) fields line up with the other form fields, see section 16e)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -2334,4 +2334,14 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
 }
 .pf-form .pf-field-readonly .pf-label:has(> .pf-required) {
   padding-right: 0;
+}
+
+/* 16e. Multi-value fields (Select2, e.g. Parent or carer email on Add Nomination) line up
+   with the other inputs (15/10/2026). The Select2 container picked up a 4px left margin
+   and its own border, so it sat 4px to the right and drew a second, darker border round
+   the inner box (50px tall instead of 48px). Only the inner box keeps its border. */
+.pf-form .select2-container {
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
