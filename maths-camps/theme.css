@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Maths Camps - ProcFu App Builder theme  v1.0.15 (2026-10-15: multi-value (Select2) fields line up with the other form fields, see section 16e)
+   Maths Camps - ProcFu App Builder theme  v1.0.16 (2026-10-19: rich-text editor toolbar back to normal size, see section 16f)
    Built from the Maths Camps website styles, 2026-09-16.
    Use: link this file from each app's Page Wrapper (customHtml), after the
    Google Fonts <link> (Poppins, Plus Jakarta Sans, Work Sans).
@@ -2344,4 +2344,91 @@ body.mc-login .pfscreen h2::before { content: none; display: none; }
   margin: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
+}
+
+/* 16f. Rich-text editor (TinyMCE 4, e.g. "Is there any information on this pupil..." on
+   Add Nomination) (19/10/2026). TinyMCE draws each toolbar button as div[role=button] >
+   button, so section 4 gave both layers a 2px ink border, 14px 28px padding, a 12px margin
+   and 16px bold text: every button became a 62px box and the toolbar ran to four rows.
+   This puts TinyMCE's own sizes back inside the editor only; the brand font is kept. */
+.pfui .mce-tinymce .mce-btn {
+  border: 1px solid transparent;
+  padding: 0;
+  margin: 0 0 0 2px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.pfui .mce-tinymce .mce-btn:hover,
+.pfui .mce-tinymce .mce-btn:focus {
+  border-color: transparent;
+  background: #e8e8e8;
+  color: var(--mc-ink);
+  box-shadow: none;
+  transform: none;
+}
+
+.pfui .mce-tinymce .mce-btn button {
+  border: 0;
+  padding: 4px 6px;
+  margin: 0;
+  min-height: 0;
+  background: transparent;
+  color: #444;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: normal;
+  box-shadow: none;
+  transform: none;
+}
+
+.pfui .mce-tinymce .mce-btn button:hover,
+.pfui .mce-tinymce .mce-btn button:focus {
+  border: 0;
+  background: transparent;
+  color: var(--mc-ink);
+  box-shadow: none;
+  transform: none;
+}
+
+.pfui .mce-tinymce .mce-btn.mce-active,
+.pfui .mce-tinymce .mce-btn.mce-active:hover {
+  border-color: var(--mc-ink);
+  background: var(--mc-ink);
+}
+
+.pfui .mce-tinymce .mce-btn.mce-active button,
+.pfui .mce-tinymce .mce-btn.mce-active button:hover,
+.pfui .mce-tinymce .mce-btn.mce-active button:focus,
+.pfui .mce-tinymce .mce-btn.mce-active i {
+  color: var(--mc-white);
+}
+
+.pfui .mce-tinymce .mce-listbox button {
+  padding-right: 20px;
+}
+
+.pfui .mce-tinymce .mce-splitbtn .mce-open {
+  padding: 4px;
+}
+
+.pfui .mce-tinymce .mce-path-item,
+.pfui .mce-tinymce .mce-path-item:hover,
+.pfui .mce-tinymce .mce-path-item:focus {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: #595959;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  box-shadow: none;
+  transform: none;
+}
+
+.pfui .mce-tinymce .mce-path-item:hover {
+  text-decoration: underline !important;
 }

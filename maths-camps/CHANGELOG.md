@@ -2,6 +2,7 @@
 
 Each app's Page Wrapper links the theme as theme.css?v=<version>. Bump that query in all three apps (11975, 11976, 11979) with every release, or browsers keep showing the old theme from cache.
 
+- v1.0.16 (19/10/2026): rich-text editor (multi-line text fields such as "Is there any information on this pupil" on Add Nomination) back to normal size. TinyMCE toolbar buttons were picking up the brand button style (2px border, 14px 28px padding, 12px margin), so the toolbar ran to four rows of 62px boxes. Buttons are 28px again, active buttons (e.g. Bold on) show ink with a white icon, and the status bar path is plain small text (section 16f). Page Wrappers now load theme.css?v=1.0.16.
 - v1.0.15 (15/10/2026): multi-value (Select2) fields such as Parent or carer email line up with the other form fields; the container loses its 4px left margin and its own border, so only the inner box shows (section 16e). Page Wrappers now load theme.css?v=1.0.15.
 - v1.0.14 (13/10/2026): Back link underline runs unbroken under the arrow and the word; drawn as a background line instead of a text underline, which broke at the gap after the arrow (section 14h). Page Wrappers now load theme.css?v=1.0.14.
 - v1.0.13 (07/10/2026): required-field asterisk never wraps onto a line by itself; it sits after the last word of the label (section 16d). Page Wrappers now load theme.css?v=1.0.13.
