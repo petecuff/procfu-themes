@@ -1,31 +1,32 @@
 # procfu-themes
 
-Shared stylesheets for ProcFu App Builder portals, served through jsDelivr.
+Shared stylesheets and images for ProcFu App Builder portals, served by GitHub Pages at
+`https://assets.futuresolutionsonline.co.uk/`.
+
+## Hosting
+
+- Custom domain set by the `CNAME` file in this repo (24/11/2026).
+- DNS: Cloudflare, CNAME `assets` -> `petecuff.github.io`, DNS only (grey cloud). Do not proxy it, or GitHub cannot renew the HTTPS certificate.
+- Why: school web filters block `*.github.io` ("Security - Domain Sharing"), so the portals lost their styling in schools.
+- Do not link to `petecuff.github.io/procfu-themes/...`. It now redirects to the custom domain over http, which browsers block on https portals.
 
 ## Maths Camps
 
-`maths-camps/theme.css` is the brand theme for the Maths Camps school portals.
+`maths-camps/theme.css` is the brand theme for the Maths Camps school portals (ProcFu apps 11975 mathsschool, 11976 mathsparent, 11979 mathstrust).
 
-Paste this into each app's **Page Wrapper** (Configuration > Page Wrapper). Leave **HTML Header** empty.
+Each app's **Page Wrapper** (Configuration > Page Wrapper) links it like this. Leave **HTML Header** empty.
 
 ```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/petecuff/procfu-themes@COMMIT/maths-camps/theme.css">
-<style>
-/* App-specific overrides go here */
-</style>
+<link rel="stylesheet" href="https://assets.futuresolutionsonline.co.uk/maths-camps/theme.css?v=1.0.16">
 ```
 
-### Versioning
+The logo in the Logged In and Logged Out headers is
+`https://assets.futuresolutionsonline.co.uk/maths-camps/img/logo-header.png`.
 
-Each app links to a fixed commit (`@<sha>`), so a change reaches an app only when that app's link is updated. To release a change:
+### Releasing a change
 
-1. Commit the change to `main`.
-2. Replace the commit SHA in each app's Page Wrapper with the new one.
-
-For a link that follows `main` instead, use `@main` and purge the cache after each push: `https://purge.jsdelivr.net/gh/petecuff/procfu-themes@main/maths-camps/theme.css`.
+1. Commit the change to `main`. GitHub Pages deploys it in about a minute.
+2. Bump the `?v=` number in each app's Page Wrapper so browsers fetch the new file.
 
 ### Utility classes
 
